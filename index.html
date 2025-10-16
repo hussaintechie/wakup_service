@@ -36,6 +36,25 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+
+
+   <style>
+    body {
+    
+      background: #f0f0f0;
+  
+    }
+    .typing-container {
+      font-size: 2rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid black; /* cursor effect */
+      width: 20ch; /* container width */
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -69,12 +88,47 @@
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" class="typing-container" id="typing" >
 
     <!-- Hero Section -->
     
 <img src="vector-isometric-illustration-coding-concept_1754-54.jpg" width="50%" height="50%" alt="">
-        
+     <h1>wakeup </h1> 
+<div class="typing-container" id="typing"></div>
+
+    
+  <script>
+    const texts = ["Wakeup Service", "Web Development", "UI/UX", "API Interaction"];
+    let i = 0;
+    let j = 0;
+    let currentText = '';
+    let isDeleting = false;
+
+    function type() {
+      const container = document.getElementById('typing');
+      if (!isDeleting) {
+        currentText = texts[i].substring(0, j + 1);
+        container.textContent = currentText;
+        j++;
+        if (j === texts[i].length) {
+          isDeleting = true;
+          setTimeout(type, 1000); // pause before deleting
+          return;
+        }
+      } else {
+        currentText = texts[i].substring(0, j - 1);
+        container.textContent = currentText;
+        j--;
+        if (j === 0) {
+          isDeleting = false;
+          i = (i + 1) % texts.length;
+        }
+      }
+      setTimeout(type, isDeleting ? 50 : 150);
+    }
+
+    type();
+  </script> 
 
   </main>
 
