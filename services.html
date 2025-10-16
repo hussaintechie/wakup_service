@@ -26,6 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/background.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Kelly
@@ -34,10 +35,21 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    #plexus {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
 </head>
 
 <body class="services-page">
-
+<canvas id="plexus"></canvas>
   <header id="header" class="header d-flex align-items-center light-background sticky-top">
     <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
@@ -234,7 +246,63 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+<script>
+    const canvas = document.getElementById('plexus');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    const points = [];
+    const numPoints = 100;
+    const maxDistance = 150;
 
+    for (let i = 0; i < numPoints; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < numPoints; i++) {
+        const p1 = points[i];
+        for (let j = i + 1; j < numPoints; j++) {
+          const p2 = points[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxDistance) {
+            ctx.strokeStyle = `rgba(0,0,0,${1 - dist / maxDistance})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      for (let i = 0; i < numPoints; i++) {
+        const p = points[i];
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 
 </html>

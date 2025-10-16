@@ -60,12 +60,11 @@
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
-body {
-  color: var(--default-color);
-  background-color: var(--background-color);
-  font-family: var(--default-font);
+body{
+  background: white;
+  color:#495057
 }
-
+  
 a {
   color: var(--accent-color);
   text-decoration: none;
@@ -637,8 +636,8 @@ h6 {
 --------------------------------------------------------------*/
 section,
 .section {
-  color: var(--default-color);
-  background-color: var(--background-color);
+
+  background-color: transparent;
   padding: 60px 0;
   scroll-margin-top: 100px;
   overflow: clip;
@@ -1459,4 +1458,61 @@ section,
   color:#34b7a7;
   box-shadow: 0 0 10px #34b7a7;
   transform: scale(1.05);
+}
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  gap: 50px; /* space between image and text */
+  flex-wrap: wrap; /* for mobile stacking */
+}
+
+/* Left image */
+.hero-container .hero-image {
+  flex: 1 1 400px;
+  max-width: 1000px;
+}
+
+.hero-container .hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* Right text */
+.hero-container .hero-text {
+  flex: 1 1 400px;
+  text-align: left;
+}
+
+.hero-container .hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  
+}
+
+.hero-container .hero-text h2 {
+  font-size: 1.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid black; /* typewriter cursor */
+  padding-right: 5px;
+  min-height: 2.2rem
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-container .hero-text {
+    text-align: center;
+  }
+  .hero-container .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-container .hero-text h2 {
+    font-size: 1.4rem;
+  }
 }
