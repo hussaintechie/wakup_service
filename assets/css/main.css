@@ -1317,7 +1317,7 @@ section,
 # Contact Section
 --------------------------------------------------------------*/
 .contact .info-wrap {
-  background-color: var(--surface-color);
+  /* background-color: var(--surface-color); */
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
@@ -1423,7 +1423,7 @@ section,
 
 /* ======= Interests Section ======= */
 #interests {
-  background-color: #34b7a7;
+  background-color: #34b7a7a1;
   color: black;
   padding: 80px 0;
   text-align: center;
